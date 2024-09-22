@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs:
     let
       system = "x86_64-linux"; # Adjust the system architecture if needed
       pkgs = import nixpkgs {
