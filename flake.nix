@@ -40,6 +40,7 @@
     {
       nixosConfigurations = { 
         wsl = nixpkgs.lib.nixosSystem {
+          hostPlatform = pkgs.stdenv.hostPlatform;
           specialArgs = { inherit inputs; };
           modules = [ 
             nixos-wsl.nixosModules.default
