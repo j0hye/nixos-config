@@ -2,6 +2,9 @@
 {
   home.packages = with pkgs; [
 
+    # Neovim
+    nvim-pkg
+
     # lua
     lua-language-server
     stylua
