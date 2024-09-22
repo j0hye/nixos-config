@@ -8,11 +8,12 @@
   home.packages = [
     pkgs.ripgrep
     pkgs.fd
+    pkgs.clang
   ];
 
-  home.sessionVariables = {
-    EDITOR = "vim";
-  };
+  imports = [ 
+    ./nvim.nix 
+  ];
 
   # Shell
   programs.zsh = {
