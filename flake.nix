@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, nvim-nix, ... }@inputs:
     let
       system = "x86_64-linux"; # Adjust the system architecture if needed
       pkgs = import nixpkgs {
@@ -32,7 +32,7 @@
         };
         overlays = [
           # Neovim overlay
-          inputs.nvim-nix.overlays.${system}.default
+          nvim-nix.overlays.default
         ];
 
       };
@@ -46,6 +46,7 @@
             nixos-wsl.nixosModules.default
             inputs.home-manager.nixosModules.default
             ./hosts/wsl/configuration.nix 
+            ./modules/shell.nix
           ];
         };
       };
