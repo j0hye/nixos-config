@@ -43,7 +43,7 @@
           specialArgs = { inherit inputs; };
           modules = [ 
             inputs.home-manager.nixosModules.default
-            inputs.nixos-wsl.nixosMosules.default
+            inputs.nixos-wsl.nixosModules.default
             ./hosts/wsl/configuration.nix 
           ];
         };
