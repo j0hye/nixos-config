@@ -52,7 +52,6 @@
       homeConfigurations = {
         johye = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;  # Reference pkgs from nixpkgs
-          system = system;  # Specify the system architecture
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./home/home.nix ];
         };
