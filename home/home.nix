@@ -27,17 +27,17 @@
   users.defaultUserShell = pkgs.zsh;
 
   # Prompt
-  programs.starship = {
-    enable = true;
-    presets = ["pure-preset"];
-    settings = {
-      nix_shell = {
-        format = "via [$symbol(\($name\))]($style) ";
-        symbol = " ";
-      };
-    };
-    # TODO: fix colors
-  };
+  #programs.starship = {
+  #  enable = true;
+  #  presets = ["pure-preset"];
+  #  settings = {
+  #    nix_shell = {
+  #      format = "via [$symbol(\($name\))]($style) ";
+  #      symbol = " ";
+  #    };
+  #  };
+  #  # TODO: fix colors
+  #};
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
