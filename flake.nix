@@ -42,8 +42,8 @@
         wsl = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [ 
+            nixos-wsl.nixosModules.default
             inputs.home-manager.nixosModules.default
-            inputs.nixos-wsl.nixosModules.default
             ./hosts/wsl/configuration.nix 
           ];
         };
