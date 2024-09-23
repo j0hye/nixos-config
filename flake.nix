@@ -18,7 +18,7 @@
     # Neovim
     nvim-nix = {
       url = "github:j0hye/nvim-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
