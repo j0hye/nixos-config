@@ -2,7 +2,6 @@
   description = "Nixos config flake";
 
   inputs = {
-
     # Unstable
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -22,40 +21,44 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nvim-nix, ... }@inputs:
-    let
-      system = "x86_64-linux"; # Adjust the system architecture if needed
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-            allowUnfree = true;
-        };
-        overlays = [
-          # Neovim overlay
-          nvim-nix.overlays.default
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    nixos-wsl,
+    nvim-nix,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux"; # Adjust the system architecture if needed
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
+      overlays = [
+        # Neovim overlay
+        nvim-nix.overlays.default
+      ];
+    };
+  in {
+    nixosConfigurations = {
+      wsl = nixpkgs.lib.nixosSystem {
+        system = system;
+        specialArgs = {inherit inputs;};
+        modules = [
+          nixos-wsl.nixosModules.default
+          inputs.home-manager.nixosModules.default
+          ./hosts/wsl/configuration.nix
+          ./modules/shell.nix
         ];
-
-      };
-    in
-    {
-      nixosConfigurations = { 
-        wsl = nixpkgs.lib.nixosSystem {
-          system = system;
-          specialArgs = { inherit inputs; };
-          modules = [ 
-            nixos-wsl.nixosModules.default
-            inputs.home-manager.nixosModules.default
-            ./hosts/wsl/configuration.nix 
-            ./modules/shell.nix
-          ];
-        };
-      };
-      homeConfigurations = {
-        johye = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs;  # Reference pkgs from nixpkgs
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home/home.nix ];
-        };
       };
     };
+    homeConfigurations = {
+      johye = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs; # Reference pkgs from nixpkgs
+        extraSpecialArgs = {inherit inputs;};
+        modules = [./home/home.nix];
+      };
+    };
+  };
 }
