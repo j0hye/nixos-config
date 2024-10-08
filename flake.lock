@@ -8,11 +8,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1728406071,
-        "narHash": "sha256-80DAwVLE/SJ0yV9guRMjdFpTvClcYOOMCTcwfStoOzA=",
+        "lastModified": 1728418415,
+        "narHash": "sha256-t5cBwPsMGbRtkDKqpEFdtPNKvFsTFced+PKqzRfGMtM=",
         "owner": "Saghen",
         "repo": "blink.cmp",
-        "rev": "791ab6b2838dc62e8b4a33ca403b2e120f5ce089",
+        "rev": "6a21d7c12d7186313e0dea2c04d0dd63b6534115",
         "type": "github"
       },
       "original": {
@@ -1155,11 +1155,11 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1728410827,
-        "narHash": "sha256-kDiZqrEQDwF7u76A2B9Ku21DV1hpdLBCJV/JSuhcCnM=",
+        "lastModified": 1728423939,
+        "narHash": "sha256-pacl6ZNuOnQbjSjLSzkRddEX7AGboYUVwsMCM7F4Z3g=",
         "owner": "j0hye",
         "repo": "nvim-nix",
-        "rev": "abfd939c69ceb25a1b38d8acff50f46477e84872",
+        "rev": "2f1348a65021413c8a6dd5dca657325550f85145",
         "type": "github"
       },
       "original": {
