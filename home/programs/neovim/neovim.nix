@@ -25,7 +25,7 @@
       rev = "${version}";
       # hash = "";
     };
-  };
+  });
 
   nvim = let
     config = let
