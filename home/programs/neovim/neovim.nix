@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   lib,
   wrapNeovimUnstable,
   # neovim-unwrapped,
@@ -17,7 +16,6 @@
   bundled ? true,
   ...
 }: let
-  neovim-nightly = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default; 
   nvim = let
     config = let
       extraPackages = [
@@ -66,7 +64,7 @@
         ];
       };
   in
-    wrapNeovimUnstable neovim-nightly config;
+    wrapNeovimUnstable inputs.neovim-nightly-overlay.packages.${pkgs.system}.default config;
 in
   buildFHSEnv {
     name = "nvim";
