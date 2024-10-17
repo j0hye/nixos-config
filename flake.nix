@@ -1,5 +1,5 @@
 {
-  description = "Nixos config flake";
+  description = "OI";
 
   inputs = {
     # Unstable
@@ -22,6 +22,12 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Flake-utils
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -30,6 +36,7 @@
     home-manager,
     nixos-wsl,
     neovim-nightly-overlay,
+    flake-utils,
     ...
   } @ inputs: 
   let

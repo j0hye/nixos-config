@@ -16,10 +16,7 @@
   programs.neovim = {   
     # Enable and use custom package
     enable = true;
-    package = pkgs.neovim-unwrapped-nightly;
-    # package = pkgs.callPackage ./programs/neovim/neovim.nix { 
-    #   bundled = true; 
-    # };
+    package = inputs.neovim-nightly-overlay.packages."x86_64-linux".default;
   };
 
   # Default editor
