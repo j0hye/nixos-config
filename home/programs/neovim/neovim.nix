@@ -1,9 +1,8 @@
 {
-  inputs,
   pkgs,
   lib,
   wrapNeovimUnstable,
-  # neovim-unwrapped,
+  neovim-unwrapped,
   neovimUtils,
   writeShellScript,
   lua5_1,
@@ -65,7 +64,7 @@
         ];
       };
   in
-    wrapNeovimUnstable inputs.neovim-nightly-overlay.packages.${pkgs.system}.default config;
+    wrapNeovimUnstable neovim-unwrapped config;
 in
   buildFHSEnv {
     name = "nvim";
