@@ -20,7 +20,10 @@
   programs.neovim = {   
     # Enable and use custom package
     enable = true;
-    package = pkgs.callPackage ./programs/neovim/neovim.nix { bundled = true; };
+    package = pkgs.callPackage ./programs/neovim/neovim.nix { 
+      bundled = true; 
+      inputs = inputs;
+      };
   };
 
   # Default editor
