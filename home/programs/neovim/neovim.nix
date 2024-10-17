@@ -25,10 +25,8 @@
       rev = "${version}";
       # hash = "";
     };
-    
-    meta = oldAttrs.meta // {
-      description = "Neovim nightly";
-    };
+
+    inherit (oldAttrs) meta;
   });
 
   nvim = let
