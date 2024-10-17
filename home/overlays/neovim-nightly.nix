@@ -1,5 +1,22 @@
-self: super: {
-  # Rename the package from the neovim-nightly overlay to neovim-nightly
-  availablePackages = builtins.attrNames super;
-  neovim-nightly = super.neovim-nightly-overlay.default;
+{
+  inputs = {
+    ...
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+  };
+
+  outputs = { self, ... }@inputs:
+    let
+      overlays = [
+        inputs.neovim-nightly-overlay.overlays.default
+      ];
+    in
+      homeConfigurations = {
+        johye = inputs.home-manager.lib.homeManagerConfiguration {
+          modules = [
+            {
+              nixpkgs.overlays = overlays;
+            };
+          ];
+        };
+      };
 }
