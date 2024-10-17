@@ -8,16 +8,11 @@
   home.homeDirectory = "/home/johye";
   home.stateVersion = "24.05";
 
-  nixpkgs.overlays = [
-    inputs.neovim-nightly-overlay.overlays.default
-  ];
-
   home.packages = [
     # pkgs.clang
     pkgs.xclip
   ];
   
-
   programs.neovim = {   
     # Enable and use custom package
     enable = true;
