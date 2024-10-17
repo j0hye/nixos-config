@@ -15,7 +15,7 @@
   manix,
   buildFHSEnv,
   bundled ? true,
-  ...,
+  ...
 }: let
   neovim-nightly = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default; 
   nvim = let
