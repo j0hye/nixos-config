@@ -26,7 +26,7 @@
       # hash = "";
     };
 
-    # inherit (oldAttrs) meta;
+    inherit (oldAttrs) meta;
   });
 
   nvim = let
