@@ -26,7 +26,7 @@
       # hash = "";
     };
     
-    meta = oldAtters.meta // {
+    meta = oldAttrs.meta // {
       description = "Neovim nightly";
     };
   });
