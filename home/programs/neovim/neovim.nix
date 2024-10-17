@@ -2,7 +2,7 @@
   pkgs,
   lib,
   wrapNeovimUnstable,
-  neovim-unwrapped,
+  # neovim-unwrapped,
   neovimUtils,
   writeShellScript,
   lua5_1,
@@ -16,7 +16,7 @@
   bundled ? true,
   ...
 }: let
-  neovim-nightly = neovim-unwrapped.overrideAttrs (oldAttrs: rec {
+  neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: rec {
     version = "nightly";
 
     src = pkgs.fetchFromGithub {
@@ -26,7 +26,7 @@
       # hash = "";
     };
 
-    inherit (oldAttrs) meta;
+    # inherit (oldAttrs) meta;
   });
 
   nvim = let
