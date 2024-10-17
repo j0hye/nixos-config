@@ -9,17 +9,13 @@
   home.stateVersion = "24.05";
 
   nixpkgs.overlays = [
-    (import ./overlays)
+    (import ./overlays/neovim-nightly.nix)
   ];
 
   home.packages = [
     # pkgs.clang
     pkgs.xclip
   ];
-
-  # imports = [
-  #   ./nvim.nix
-  # ];
 
   programs.neovim = {   
     # Enable and use custom package
