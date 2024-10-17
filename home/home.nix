@@ -54,7 +54,7 @@
     ];
 
     # Load init.lua
-    extraConfig = builtins.readFile ../configs/nvim/init.lua;
+    extraConfig = builtins.readFile (toString ./../configs/nvim/init.lua);
 
     # Plugins handled by nix
     plugins = with pkgs.vimPlugins; [
