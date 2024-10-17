@@ -22,6 +22,7 @@
     enable = true;
     package = pkgs.callPackage ./programs/neovim/neovim.nix { 
       bundled = true; 
+      inherit inputs;
     };
   };
 
