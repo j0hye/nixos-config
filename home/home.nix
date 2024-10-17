@@ -8,6 +8,10 @@
   home.homeDirectory = "/home/johye";
   home.stateVersion = "24.05";
 
+  nixpkgs.overlays = [
+    (import ./overlays)
+  ];
+
   home.packages = [
     # pkgs.clang
     pkgs.xclip
@@ -20,7 +24,7 @@
   programs.neovim = {   
     # Enable and use custom package
     enable = true;
-    package = pkgs.neovim-unwrapped
+    package = pkgs.neovim-unwrapped;
     # package = pkgs.callPackage ./programs/neovim/neovim.nix { 
     #   bundled = true; 
     # };
