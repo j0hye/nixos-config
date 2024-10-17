@@ -16,6 +16,17 @@
   bundled ? true,
   ...
 }: let
+  neovim-nightly = neovim-unwrapped.overrideAttrs (oldAttrs: rec {
+    version = "nightly";
+
+    src = pkgs.fetchFromGithub {
+      owner = "neovim";
+      repo = "neovim";
+      rev = "${version}";
+      # hash = "";
+    };
+  };
+
   nvim = let
     config = let
       extraPackages = [
@@ -64,7 +75,7 @@
         ];
       };
   in
-    wrapNeovimUnstable neovim-unwrapped config;
+    wrapNeovimUnstable neovim-nightly config;
 in
   buildFHSEnv {
     name = "nvim";
