@@ -18,7 +18,11 @@
   #   ./nvim.nix
   # ];
 
-  programs.neovim = {
+  programs.neovim =   
+  let
+    toLua = str: "lua << EOF\n${str}\nEOF\n";
+    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  in {
     # Enable and use nightly
     enable = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
@@ -54,7 +58,7 @@
     ];
 
     # Load init.lua
-    extraConfig = builtins.readFile (toString ./../configs/nvim/init.lua);
+    extraConfig = toLuaFile ./../configs/nvim/init.lua);
 
     # Plugins handled by nix
     plugins = with pkgs.vimPlugins; [
