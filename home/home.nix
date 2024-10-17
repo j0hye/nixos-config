@@ -58,7 +58,7 @@
     ];
 
     # Load init.lua
-    extraConfig = toLuaFile ./../configs/nvim/init.lua);
+    extraConfig = toLuaFile ./../configs/nvim/init.lua;
 
     # Plugins handled by nix
     plugins = with pkgs.vimPlugins; [
