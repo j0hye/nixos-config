@@ -26,7 +26,9 @@
       # hash = "";
     };
 
-    inherit (oldAttrs) meta;
+    meta = oldAttrs.meta // {
+    description = "Neovim nightly build";  # Explicitly define the description
+    }; 
   });
 
   nvim = let
