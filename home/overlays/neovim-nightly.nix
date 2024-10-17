@@ -1,12 +1,5 @@
-final: prev: {
-  neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (oldAttrs: rec {
-    version = "nightly";
-
-    src = prev.fetchFromGitHub {
-      owner = "neovim";
-      repo = "neovim";
-      rev = "nightly";
-      sha256 = "sha256-RB7vPyiJIjTiKpeeI9wsi2o1H5jsMtWn8Iq1KtjJeDw=";
-    };
-  });
+self: super: {
+  # Rename the package from the neovim-nightly overlay to neovim-nightly
+  availablePackages = builtins.attrNames super;
+  neovim-nightly = super.neovim-nightly-overlay.default;
 }

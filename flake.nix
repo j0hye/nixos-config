@@ -17,12 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # # Neovim
-    # nvim-nix = {
-    #   url = "github:j0hye/nvim-nix";
-    # inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     # Neovim-nightly-overlay
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
@@ -35,19 +29,15 @@
     nixpkgs,
     home-manager,
     nixos-wsl,
-    # nvim-nix,
+    neovim-nightly-overlay,
     ...
   } @ inputs: let
-    system = "x86_64-linux"; # Adjust the system architecture if needed
+    system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
       config = {
         allowUnfree = true;
       };
-      # overlays = [
-      #   # Neovim overlay
-      #   nvim-nix.overlays.default
-      # ];
     };
   in {
     nixosConfigurations = {
@@ -64,7 +54,7 @@
     };
     homeConfigurations = {
       johye = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs; # Reference pkgs from nixpkgs
+        pkgs = pkgs;
         extraSpecialArgs = {inherit inputs;};
         modules = [./home/home.nix];
       };
