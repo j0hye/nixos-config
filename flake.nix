@@ -31,10 +31,15 @@
     nixos-wsl,
     neovim-nightly-overlay,
     ...
-  } @ inputs: let
+  } @ inputs: 
+  let
     system = "x86_64-linux";
+    overlays = [
+      neovim-nightly-overlay.overlays.default  # Load the neovim overlay
+    ];
     pkgs = import nixpkgs {
       inherit system;
+      inherit overlays;
       config = {
         allowUnfree = true;
       };
