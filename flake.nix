@@ -6,7 +6,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # WSL
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.url = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home manager
     home-manager = {
@@ -14,10 +17,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Neovim
-    nvim-nix = {
-      url = "github:j0hye/nvim-nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
+    # # Neovim
+    # nvim-nix = {
+    #   url = "github:j0hye/nvim-nix";
+    # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    # Neovim-nightly-overlay
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -26,7 +35,7 @@
     nixpkgs,
     home-manager,
     nixos-wsl,
-    nvim-nix,
+    # nvim-nix,
     ...
   } @ inputs: let
     system = "x86_64-linux"; # Adjust the system architecture if needed
@@ -35,10 +44,10 @@
       config = {
         allowUnfree = true;
       };
-      overlays = [
-        # Neovim overlay
-        nvim-nix.overlays.default
-      ];
+      # overlays = [
+      #   # Neovim overlay
+      #   nvim-nix.overlays.default
+      # ];
     };
   in {
     nixosConfigurations = {

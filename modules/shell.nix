@@ -1,5 +1,4 @@
-{ config, pkgs, ...}:
-{
+{pkgs, ...}: {
   # Shell
   programs.zsh = {
     enable = true;
@@ -13,14 +12,14 @@
 
   # Prompt
   programs.starship = {
-   enable = true;
-   presets = ["pure-preset"];
-   settings = {
-     nix_shell = {
-       format = "via [$symbol(\($name\))]($style) ";
-       symbol = " ";
+    enable = true;
+    presets = ["pure-preset"];
+    settings = {
+      nix_shell = {
+        format = "via [$symbol(\($name\))]($style) ";
+        symbol = " ";
+      };
     };
-   };
-   # TODO: fix colors
+    # TODO: fix colors
   };
 }
