@@ -27,7 +27,8 @@
     };
 
     meta = oldAttrs.meta // {
-    description = "Neovim nightly build";  # Explicitly define the description
+      description = "Neovim nightly build";  # Explicitly define the description
+      longDescription = "This is a nightly build of Neovim, the extensible Vim-based text editor."; 
     }; 
   });
 
