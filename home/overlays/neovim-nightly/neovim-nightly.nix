@@ -1,17 +1,21 @@
-self: super: {
+{ inputs, pkgs, system, lib, ... }:
+let
+  neovim-nightly-unwrapped = inputs.neovim-nightly-overlay.packages.${system}.default;
+in
+{
   # Add a package named `nvim-fhs` to nixpkgs
   nvim-fhs = let
     nvim = let
       config = let
         extraPackages = [
-          self.lua5_1
-          self.luarocks
-          self.clang
-          self.pkg-config
-          self.cargo
+          pkgs.lua5_1
+          pkgs.luarocks
+          pkgs.clang
+          pkgs.pkg-config
+          pkgs.cargo
         ];
       in
-        self.neovimUtils.makeNeovimConfig
+        pkgs.neovimUtils.makeNeovimConfig
         {
           withPython3 = false;
           withRuby = false;
@@ -26,8 +30,8 @@ self: super: {
 
           customRC =
             ''
-              set runtimepath^=${../../.}
-              source ${../../.}/init.lua
+              set runtimepath^=${../../configs/nvim/.}
+              source ${../../configs/nvim/.}/init.lua
             '';
         }
         // {
@@ -35,19 +39,19 @@ self: super: {
             "--prefix"
             "PATH"
             ":"
-            "${self.lib.makeBinPath extraPackages}"
+            "${lib.makeBinPath extraPackages}"
           ];
         };
     in
-      self.wrapNeovimUnstable self.neovim-unwrapped config;
+      pkgs.wrapNeovimUnstable neovim-nightly-unwrapped config;
   in
-    self.buildFHSEnv {
+    pkgs.buildFHSEnv {
       name = "nvim";
       targetPkgs = pkgs: [
         nvim
       ];
 
-      runScript = self.writeShellScript "nvim-fhs.sh" ''
+      runScript = pkgs.writeShellScript "nvim-fhs.sh" ''
         exec ${nvim}/bin/nvim "$@"
       '';
     };

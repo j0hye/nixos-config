@@ -18,11 +18,12 @@
     pkgs.nvim-fhs
   ];
   
-  programs.neovim = {   
-    # Enable and use custom package
-    enable = true;
-    package = inputs.neovim-nightly-overlay.packages."x86_64-linux".default;
-  };
+  # programs.neovim = {   
+  #   # Enable and use custom package
+  #   enable = true;
+  #   package = pkgs.nvim-fhs;
+  #   # package = inputs.neovim-nightly-overlay.packages."x86_64-linux".default;
+  # };
 
   # Default editor
   home.sessionVariables = {
