@@ -8,9 +8,14 @@
   home.homeDirectory = "/home/johye";
   home.stateVersion = "24.05";
 
+  nixpkgs.overlays = [
+    (import ./overlays/neovim-nightly/neovim-nightly.nix)
+  ];
+
   home.packages = [
     # pkgs.clang
     pkgs.xclip
+    pkgs.nvim-fhs
   ];
   
   programs.neovim = {   
