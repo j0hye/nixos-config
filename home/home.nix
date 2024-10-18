@@ -9,22 +9,14 @@
   home.stateVersion = "24.05";
 
   nixpkgs.overlays = [
-    (import ./overlays/neovim-nightly/neovim-nightly.nix)
+    (import ./overlays/neovim-nightly/neovim-nightly.nix { inherit inputs; })
   ];
 
   home.packages = [
-    # pkgs.clang
     pkgs.xclip
     pkgs.nvim-fhs
   ];
   
-  # programs.neovim = {   
-  #   # Enable and use custom package
-  #   enable = true;
-  #   package = pkgs.nvim-fhs;
-  #   # package = inputs.neovim-nightly-overlay.packages."x86_64-linux".default;
-  # };
-
   # Default editor
   home.sessionVariables = {
     EDITOR = "nvim";
