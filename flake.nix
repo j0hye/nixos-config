@@ -23,11 +23,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # # Flake-utils
-    # flake-utils = {
-    #   url = "github:numtide/flake-utils";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
   outputs = {
@@ -36,17 +31,12 @@
     home-manager,
     nixos-wsl,
     neovim-nightly-overlay,
-    # flake-utils,
     ...
   } @ inputs: 
   let
     system = "x86_64-linux";
-    # overlays = [
-    #   neovim-nightly-overlay.overlays.default  # Load the neovim overlay
-    # ];
     pkgs = import nixpkgs {
       inherit system;
-      # inherit overlays;
       config = {
         allowUnfree = true;
       };
