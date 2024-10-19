@@ -44,8 +44,8 @@
       };
     };
   in {
-    overlays.default = import ./overlays;
-
+    overlays.default = import ./overlays/neovim-nightly-unwrapped.nix;
+    
     nixosConfigurations = {
       wsl = nixpkgs.lib.nixosSystem {
         system = system;

@@ -18,7 +18,7 @@
   ];
 
   programs.neovim = {
-    enabled = true;
+    enable = true;
     package = pkgs.neovim-nightly-unwrapped;
   };
   

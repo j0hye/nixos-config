@@ -1,4 +1,4 @@
-[
-  (import ./neovim-nightly-unwrapped.nix)
-]
-
+{ ... }:
+{
+    (import ./neovim-nightly-unwrapped.nix {})
+}
