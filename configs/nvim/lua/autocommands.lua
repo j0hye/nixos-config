@@ -21,22 +21,22 @@ api.nvim_create_autocmd('LspAttach', {
 			vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
 		end
 
-		map('gd', require('telescope.builtin').lsp_definitions, 'Goto definition')
+		-- map('gd', require('telescope.builtin').lsp_definitions, 'Goto definition')
 		map('gD', vim.lsp.buf.declaration, 'Goto declaration')
-		map('gr', require('telescope.builtin').lsp_references, 'Goto references')
-		map('gi', require('telescope.builtin').lsp_implementations, 'Goto implementation')
-		map('<leader>cd', require('telescope.builtin').lsp_type_definitions, 'Type [d]efinition')
-		map('<leader>td', require('telescope.builtin').lsp_document_symbols, '[D]ocument symbols')
-		map('<leader>tw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace symbols')
+		-- map('gr', require('telescope.builtin').lsp_references, 'Goto references')
+		-- map('gi', require('telescope.builtin').lsp_implementations, 'Goto implementation')
+		-- map('<leader>cd', require('telescope.builtin').lsp_type_definitions, 'Type [d]efinition')
+		-- map('<leader>td', require('telescope.builtin').lsp_document_symbols, '[D]ocument symbols')
+		-- map('<leader>tw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace symbols')
 		map('<leader>cr', vim.lsp.buf.rename, '[R]ename')
 		map('<leader>ca', vim.lsp.buf.code_action, 'Code [a]ction', { 'n', 'x' })
 		map('<leader>cl', vim.lsp.codelens.run, 'Run Code[l]ens')
 		map('<C-k>', vim.lsp.buf.signature_help, 'Show signature help', 'i')
 
 		-- Format with Conform and LSP fallback
-		map('<leader>f', function()
-			require('conform').format()
-		end, '[F]ormat buffer')
+		-- map('<leader>f', function()
+		-- 	require('conform').format()
+		-- end, '[F]ormat buffer')
 
 		-- LSP Range format
 		map('<leader>f', function()
