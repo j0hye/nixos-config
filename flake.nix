@@ -44,9 +44,11 @@
       };
     };
   in {
-    overlays.default = neovim-nightly-overlay.overlays.default;
-    overlays.default = import ./overlays/neovim-nightly-unwrapped.nix;
-    
+    overlays.default = [
+      neovim-nightly-overlay.overlays.default;
+      import ./overlays/neovim-nightly-unwrapped.nix;
+   ];
+
     nixosConfigurations = {
       wsl = nixpkgs.lib.nixosSystem {
         system = system;
