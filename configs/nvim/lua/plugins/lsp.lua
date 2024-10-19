@@ -1,10 +1,11 @@
-deps.add({
-    source = 'neovim/nvim-lspconfig',
-    depends = { 'folke/lazydev.nvim' },
-})
+deps.add {
+    source = "neovim/nvim-lspconfig",
+    depends = { "folke/lazydev.nvim" },
+}
 deps.later(function()
-    if vim.fn.executable('lua-language-server') then
-        local lspconfig = require('lspconfig')
+    -- Lua
+    if vim.fn.executable("lua-language-server") then
+        local lspconfig = require("lspconfig")
         local server = {
             settings = {
                 Lua = {
@@ -15,20 +16,20 @@ deps.later(function()
                         enable = true,
                     },
                     completion = {
-                        callSnippet = 'Replace',
+                        callSnippet = "Replace",
                     },
                     doc = {
-                        privateName = { '^_' },
+                        privateName = { "^_" },
                     },
                     -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                     diagnostics = {
-                        disable = { 'missing-fields' },
+                        disable = { "missing-fields" },
                         globals = {
-                            'vim',
-                            'describe',
-                            'it',
-                            'assert',
-                            'stub',
+                            "vim",
+                            "describe",
+                            "it",
+                            "assert",
+                            "stub",
                         },
                     },
                     hint = {
@@ -41,8 +42,10 @@ deps.later(function()
             },
         }
         lspconfig.lua_ls.setup(server)
-        require('lazydev').setup {}
+        require("lazydev").setup {}
     end
+    -- Nix
+
     -- -- LSP Signature setup
     -- local sig_opts = {
     --     bind = true,
@@ -61,36 +64,36 @@ deps.later(function()
 
     -- Configure Neovim diagnostic messages
     local function prefix_diagnostic(prefix, diagnostic)
-        return string.format(prefix .. ' %s', diagnostic.message)
+        return string.format(prefix .. " %s", diagnostic.message)
     end
 
     vim.diagnostic.config {
         virtual_text = {
-            prefix = '',
+            prefix = "",
             format = function(diagnostic)
                 local severity = diagnostic.severity
                 if severity == vim.diagnostic.severity.ERROR then
-                    return prefix_diagnostic('󰅚', diagnostic)
+                    return prefix_diagnostic("󰅚", diagnostic)
                 end
                 if severity == vim.diagnostic.severity.WARN then
-                    return prefix_diagnostic('⚠', diagnostic)
+                    return prefix_diagnostic("⚠", diagnostic)
                 end
                 if severity == vim.diagnostic.severity.INFO then
-                    return prefix_diagnostic('ⓘ', diagnostic)
+                    return prefix_diagnostic("ⓘ", diagnostic)
                 end
                 if severity == vim.diagnostic.severity.HINT then
-                    return prefix_diagnostic('󰌶', diagnostic)
+                    return prefix_diagnostic("󰌶", diagnostic)
                 end
-                return prefix_diagnostic('■', diagnostic)
+                return prefix_diagnostic("■", diagnostic)
             end,
         },
         signs = {
             text = {
                 -- Requires Nerd fonts
-                [vim.diagnostic.severity.ERROR] = '󰅚',
-                [vim.diagnostic.severity.WARN] = '⚠',
-                [vim.diagnostic.severity.INFO] = 'ⓘ',
-                [vim.diagnostic.severity.HINT] = '󰌶',
+                [vim.diagnostic.severity.ERROR] = "󰅚",
+                [vim.diagnostic.severity.WARN] = "⚠",
+                [vim.diagnostic.severity.INFO] = "ⓘ",
+                [vim.diagnostic.severity.HINT] = "󰌶",
             },
         },
         update_in_insert = false,
@@ -98,12 +101,12 @@ deps.later(function()
         severity_sort = true,
         float = {
             focusable = false,
-            style = 'minimal',
-            border = 'rounded',
-            source = 'if_many',
-            header = '',
-            prefix = '',
+            style = "minimal",
+            border = "rounded",
+            source = "if_many",
+            header = "",
+            prefix = "",
         },
     }
-    require('lspconfig.ui.windows').default_options.border = 'rounded'
+    require("lspconfig.ui.windows").default_options.border = "rounded"
 end)

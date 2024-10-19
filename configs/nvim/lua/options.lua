@@ -1,5 +1,5 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Enable relative line numbers
 vim.opt.nu = true
@@ -32,7 +32,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Enable mouse mode
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 
 -- Enable ignorecase + smartcase for better searching
 vim.opt.ignorecase = true
@@ -42,7 +42,7 @@ vim.opt.smartcase = true
 vim.opt.updatetime = 50
 
 -- Set completeopt to have a better completion experience
-vim.opt.completeopt = { 'menuone', 'noselect' }
+vim.opt.completeopt = { "menuone", "noselect" }
 
 -- Enable persistent undo history
 vim.opt.undofile = true
@@ -51,10 +51,10 @@ vim.opt.undofile = true
 vim.opt.termguicolors = true
 
 -- Enable the sign column to prevent the screen from jumping
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 
 -- Enable access to System Clipboard
-vim.opt.clipboard = 'unnamed,unnamedplus'
+vim.opt.clipboard = "unnamed,unnamedplus"
 
 -- Enable cursor line highlight
 vim.opt.cursorline = true
@@ -62,7 +62,7 @@ vim.opt.cursorline = true
 -- Set fold settings
 -- These options were reccommended by nvim-ufo
 -- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
-vim.opt.foldcolumn = '0'
+vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
@@ -71,10 +71,10 @@ vim.opt.foldenable = true
 vim.opt.scrolloff = 8
 
 -- Place a column line
-vim.opt.colorcolumn = '88'
+vim.opt.colorcolumn = "88"
 
 -- Search down into subfolders
-vim.opt.path = vim.o.path .. '**'
+vim.opt.path = vim.o.path .. "**"
 
 -- Lazy redraw off for noice
 vim.opt.lazyredraw = false
@@ -86,8 +86,8 @@ vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.g.editorconfig = true
 
 -- Native plugins
-vim.cmd.filetype('plugin', 'indent', 'on')
-vim.cmd.packadd('cfilter') -- Allows filtering the quickfix list with :cfdo
+vim.cmd.filetype("plugin", "indent", "on")
+vim.cmd.packadd("cfilter") -- Allows filtering the quickfix list with :cfdo
 
 -- let sqlite.lua (which some plugins depend on) know where to find sqlite
 -- vim.g.sqlite_clib_path = require('luv').os_getenv('LIBSQLITE')
