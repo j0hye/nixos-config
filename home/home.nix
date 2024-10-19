@@ -8,6 +8,8 @@
   home.homeDirectory = "/home/johye";
   home.stateVersion = "24.05";
 
+  home-manager.useUserPkgs = true;
+  home-manager.useGlobalPkgs = true;
   # nixpkgs.overlays = [
   #   (import ./overlays/neovim-nightly/neovim-nightly.nix { inherit inputs; })
   # ];
