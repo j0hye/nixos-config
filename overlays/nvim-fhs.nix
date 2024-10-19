@@ -8,6 +8,13 @@ final: prev:  {
           clang
           pkg-config
           cargo
+          lua-language-server
+          stylua
+          nil
+          nixd
+          alejandra
+          statix
+          manix
         ];
       in
         prev.neovimUtils.makeNeovimConfig
@@ -23,9 +30,9 @@ final: prev:  {
 
           inherit extraPackages;
 
-	  # plugins = with prev.vimPlugins; [
-	  #   nvim-treesitter.withAllGrammars
-	  # ];
+	  plugins = with prev.vimPlugins; [
+	    nvim-treesitter.withAllGrammars
+	  ];
 
           customRC =
             ''
