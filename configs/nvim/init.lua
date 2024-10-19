@@ -49,12 +49,15 @@ deps.now(function()
     vim.keymap.set("n", "<leader>e", function() require("oil").toggle_float() end, { desc = "Toggle [e]xplorer" })
 end)
 
+-- Lazy load plugins
+deps.later(function()
 -- Enable mini plugins
 require('mini.pairs').setup()
 require('mini.align').setup()
 require('mini.basics').setup()
 require('mini.jump').setup()
 require('mini.cursorword').setup()
-
 -- Plugin directory
-require('plugins')
+require('plugins.lsp')
+require('plugins.colorizer')
+end)
