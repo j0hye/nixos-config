@@ -1,10 +1,7 @@
-return {
-    'lspconfig',
-    before = function()
-        deps.add('neovim/nvim-lspconfig')
-    end,
-    event = "LspAttach",
-    after = function()
+        deps.add({
+            source = 'neovim/nvim-lspconfig'
+        })
+        deps.later = function()
         -- -- LSP Signature setup
         -- local sig_opts = {
         --     bind = true,
@@ -69,4 +66,3 @@ return {
         }
         require('lspconfig.ui.windows').default_options.border = 'single'
     end,
-}

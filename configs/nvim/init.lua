@@ -56,7 +56,5 @@ require('mini.basics').setup()
 require('mini.jump').setup()
 require('mini.cursorword').setup()
 
--- Install lz.n and lazy load plugin dirs
-deps.add { source = 'nvim-neorocks/lz.n' }
-require('lz.n').load 'plugins'
-require("lz.n").load("plugins.lang")
+-- Plugin directory
+require('plugins')
