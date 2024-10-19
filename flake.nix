@@ -44,6 +44,7 @@
       };
     };
   in {
+    overlays.default = neovim-nightly-overlay.overlays.default;
     overlays.default = import ./overlays/neovim-nightly-unwrapped.nix;
     
     nixosConfigurations = {
