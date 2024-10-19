@@ -1,6 +1,5 @@
 final: prev:  {
   nvim-fhs = let
-    neovim-unwrapped-nightly = final.neovim;
     nvim = let
       config = let
         extraPackages = with prev; [
@@ -24,6 +23,10 @@ final: prev:  {
 
           inherit extraPackages;
 
+	  # plugins = with prev.vimPlugins; [
+	  #   nvim-treesitter.withAllGrammars
+	  # ];
+
           customRC =
             ''
               set runtimepath^=${../configs/nvim/.}
@@ -39,7 +42,7 @@ final: prev:  {
           ];
         };
     in
-      prev.wrapNeovimUnstable neovim-unwrapped-nightly config;
+      prev.wrapNeovimUnstable final.neovim config;
   in
     prev.buildFHSEnv {
       name = "nvim";
