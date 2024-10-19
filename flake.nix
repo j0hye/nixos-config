@@ -35,13 +35,17 @@
   } @ inputs: 
   let
     system = "x86_64-linux";
+
     pkgs = import nixpkgs {
       inherit system;
+      overlays = [ self.overlays.default ];
       config = {
         allowUnfree = true;
       };
     };
   in {
+    overlays.default = import ./overlays;
+
     nixosConfigurations = {
       wsl = nixpkgs.lib.nixosSystem {
         system = system;
@@ -54,6 +58,7 @@
         ];
       };
     };
+
     homeConfigurations = {
       johye = home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs;
