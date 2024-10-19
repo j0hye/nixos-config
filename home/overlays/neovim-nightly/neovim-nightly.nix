@@ -20,7 +20,7 @@ final: prev:  {
 
           extraLuaPackages = p:
             with p; [
-              p.magick
+              magick
             ];
 
           inherit extraPackages;
