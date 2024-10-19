@@ -4,15 +4,15 @@ final: prev:  {
     neovim-nightly-unwrapped = inputs.neovim-nightly-overlay.packages."x86_64-linux".default;
     nvim = let
       config = let
-        extraPackages = [
-          final.lua5_1
-          final.luarocks
-          final.clang
-          final.pkg-config
-          final.cargo
+        extraPackages = with prev; [
+          lua5_1
+          luarocks
+          clang
+          pkg-config
+          cargo
         ];
       in
-        final.neovimUtils.makeNeovimConfig
+        prev.neovimUtils.makeNeovimConfig
         {
           withPython3 = false;
           withRuby = false;
@@ -36,19 +36,19 @@ final: prev:  {
             "--prefix"
             "PATH"
             ":"
-            "${final.lib.makeBinPath extraPackages}"
+            "${prev.lib.makeBinPath extraPackages}"
           ];
         };
     in
-      final.wrapNeovimUnstable neovim-nightly-unwrapped config;
+      prev.wrapNeovimUnstable neovim-nightly-unwrapped config;
   in
-    final.buildFHSEnv {
+    prev.buildFHSEnv {
       name = "nvim";
       targetPkgs = pkgs: [
         nvim
       ];
 
-      runScript = final.writeShellScript "nvim-fhs.sh" ''
+      runScript = prev.writeShellScript "nvim-fhs.sh" ''
         exec ${nvim}/bin/nvim "$@"
       '';
     };
