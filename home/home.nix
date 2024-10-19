@@ -8,14 +8,19 @@
   home.homeDirectory = "/home/johye";
   home.stateVersion = "24.05";
 
-  nixpkgs.overlays = [
-    (import ./overlays/neovim-nightly/neovim-nightly.nix { inherit inputs; })
-  ];
+  # nixpkgs.overlays = [
+  #   (import ./overlays/neovim-nightly/neovim-nightly.nix { inherit inputs; })
+  # ];
 
   home.packages = [
     pkgs.xclip
-    pkgs.nvim-fhs
+    # pkgs.nvim-fhs
   ];
+
+  programs.neovim = {
+    enabled = true;
+    package = pkgs.neovim-nightly-unwrapped;
+  };
   
   # Default editor
   home.sessionVariables = {
