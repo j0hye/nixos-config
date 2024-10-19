@@ -38,16 +38,16 @@
 
     pkgs = import nixpkgs {
       inherit system;
-      # overlays = [ self.overlays.default ];
+      overlays = [ self.overlays.default ];
       config = {
         allowUnfree = true;
       };
     };
   in {
-   #  overlays.default = [
-   #    neovim-nightly-overlay.overlays.default
-   #    (import ./overlays/neovim-nightly-unwrapped.nix {inherit inputs;})
-   # ];
+    overlays.default = [
+      neovim-nightly-overlay.overlays.default
+      # (import ./overlays/neovim-nightly-unwrapped.nix {inherit inputs;})
+   ];
 
     nixosConfigurations = {
       wsl = nixpkgs.lib.nixosSystem {
