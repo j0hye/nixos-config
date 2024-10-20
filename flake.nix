@@ -22,7 +22,6 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs = {
@@ -32,8 +31,7 @@
     nixos-wsl,
     neovim-nightly-overlay,
     ...
-  } @ inputs: 
-  let
+  } @ inputs: let
     system = "x86_64-linux";
 
     pkgs = import nixpkgs {
@@ -47,9 +45,9 @@
       };
     };
   in {
-   #  overlays.default = [
-   #    (import ./overlays {inherit inputs;})
-   # ];
+    #  overlays.default = [
+    #    (import ./overlays {inherit inputs;})
+    # ];
 
     nixosConfigurations = {
       wsl = nixpkgs.lib.nixosSystem {

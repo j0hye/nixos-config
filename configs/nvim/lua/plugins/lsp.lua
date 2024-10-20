@@ -3,9 +3,9 @@ deps.add {
     depends = { "folke/lazydev.nvim" },
 }
 deps.later(function()
+    local lspconfig = require("lspconfig")
     -- Lua
     if vim.fn.executable("lua-language-server") then
-        local lspconfig = require("lspconfig")
         local server = {
             settings = {
                 Lua = {
@@ -44,8 +44,15 @@ deps.later(function()
         lspconfig.lua_ls.setup(server)
         require("lazydev").setup {}
     end
-    -- Nix
 
+    -- Nix
+    if vim.fn.executable("nil") then
+        lspconfig.nil_ls.setup {}
+    end
+
+    if vim.fn.executable("nixd") then
+        lspconfig.nixd.setup {}
+    end
     -- -- LSP Signature setup
     -- local sig_opts = {
     --     bind = true,
