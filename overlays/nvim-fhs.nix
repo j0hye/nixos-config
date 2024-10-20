@@ -1,20 +1,23 @@
-final: prev:  {
+final: prev: {
   nvim-fhs = let
     nvim = let
       config = let
         extraPackages = with prev; [
           lua5_1
-          luarocks
+          luautf8 # nvim-spider dep
           clang
-          pkg-config
-          cargo
-          lua-language-server
-          stylua
-          nil
-          nixd
-          alejandra
-          statix
-          manix
+          fd
+          ripgrep
+          # pkg-config
+          # cargo
+          # luarocks
+          # lua-language-server
+          # stylua
+          # nil
+          # nixd
+          # alejandra
+          # statix
+          # manix
         ];
       in
         prev.neovimUtils.makeNeovimConfig
@@ -25,20 +28,19 @@ final: prev:  {
 
           extraLuaPackages = p:
             with p; [
-              magick
+              # magick
             ];
 
           inherit extraPackages;
 
-	  plugins = with prev.vimPlugins; [
-	    nvim-treesitter.withAllGrammars
-	  ];
+          plugins = with prev.vimPlugins; [
+            # nvim-treesitter.withAllGrammars
+          ];
 
-          customRC =
-            ''
-              set runtimepath^=${../configs/nvim/.}
-              source ${../configs/nvim/.}/init.lua
-            '';
+          customRC = ''
+            set runtimepath^=${../configs/nvim/.}
+            source ${../configs/nvim/.}/init.lua
+          '';
         }
         // {
           wrapperArgs = [

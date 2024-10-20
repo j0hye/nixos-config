@@ -1,119 +1,83 @@
-deps.add {
-    source = "neovim/nvim-lspconfig",
-    depends = { "folke/lazydev.nvim" },
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+capabilities.textDocument.completion.completionItem = {
+  documentationFormat = { "markdown", "plaintext" },
+  snippetSupport = true,
+  preselectSupport = true,
+  insertReplaceSupport = true,
+  labelDetailsSupport = true,
+  deprecatedSupport = true,
+  commitCharactersSupport = true,
+  tagSupport = { valueSet = { 1 } },
+  resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  },
 }
-deps.later(function()
-    local lspconfig = require("lspconfig")
-    -- Lua
-    if vim.fn.executable("lua-language-server") then
-        local server = {
-            settings = {
-                Lua = {
-                    -- workspace = {
-                    --     checkThirdParty = false,
-                    -- },
-                    codeLens = {
-                        enable = true,
-                    },
-                    completion = {
-                        callSnippet = "Replace",
-                    },
-                    doc = {
-                        privateName = { "^_" },
-                    },
-                    -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                    diagnostics = {
-                        disable = { "missing-fields" },
-                        globals = {
-                            "vim",
-                            "describe",
-                            "it",
-                            "assert",
-                            "stub",
-                        },
-                    },
-                    hint = {
-                        enable = true,
-                    },
-                    signatureHelp = {
-                        enable = true,
-                    },
-                },
-            },
-        }
-        lspconfig.lua_ls.setup(server)
-        require("lazydev").setup {}
-    end
 
-    -- Nix
-    if vim.fn.executable("nil") then
-        lspconfig.nil_ls.setup {}
-    end
+local lspconfig = require "lspconfig"
 
-    if vim.fn.executable("nixd") then
-        lspconfig.nixd.setup {}
-    end
-    -- -- LSP Signature setup
-    -- local sig_opts = {
-    --     bind = true,
-    --     floating_window = true,
-    --     handler_opts = { border = 'rounded' },
-    --     hint_enable = false,
-    --     hint_prefix = {
-    --         above = '↙ ', -- when the hint is on the line above the current line
-    --         current = '← ', -- when the hint is on the same line
-    --         below = '↖ ', -- when the hint is on the line below the current line
-    --     },
-    --     wrap = false,
-    --     hi_parameter = 'LspSignatureActiveParameter',
-    -- }
-    -- require('lsp_signature').setup(sig_opts)
+lspconfig.rust_analyzer.setup {}
 
-    -- Configure Neovim diagnostic messages
-    local function prefix_diagnostic(prefix, diagnostic)
-        return string.format(prefix .. " %s", diagnostic.message)
-    end
-
-    vim.diagnostic.config {
-        virtual_text = {
-            prefix = "",
-            format = function(diagnostic)
-                local severity = diagnostic.severity
-                if severity == vim.diagnostic.severity.ERROR then
-                    return prefix_diagnostic("󰅚", diagnostic)
-                end
-                if severity == vim.diagnostic.severity.WARN then
-                    return prefix_diagnostic("⚠", diagnostic)
-                end
-                if severity == vim.diagnostic.severity.INFO then
-                    return prefix_diagnostic("ⓘ", diagnostic)
-                end
-                if severity == vim.diagnostic.severity.HINT then
-                    return prefix_diagnostic("󰌶", diagnostic)
-                end
-                return prefix_diagnostic("■", diagnostic)
-            end,
+lspconfig.lua_ls.setup {
+  filetypes = { "lua" },
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
+      completion = {
+        callSnippet = "Replace",
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
+      format = {
+        defaultConfig = {
         },
-        signs = {
-            text = {
-                -- Requires Nerd fonts
-                [vim.diagnostic.severity.ERROR] = "󰅚",
-                [vim.diagnostic.severity.WARN] = "⚠",
-                [vim.diagnostic.severity.INFO] = "ⓘ",
-                [vim.diagnostic.severity.HINT] = "󰌶",
-            },
+      },
+      hint = {
+        enable = true,
+      },
+    },
+  },
+}
+
+lspconfig.bashls.setup {}
+
+lspconfig.gopls.setup {}
+
+lspconfig.pylsp.setup {
+  settings = {
+    pylsp = {
+      plugins = {
+        jedi_completion = {
+          include_params = true,
         },
-        update_in_insert = false,
-        underline = true,
-        severity_sort = true,
-        float = {
-            focusable = false,
-            style = "minimal",
-            border = "rounded",
-            source = "if_many",
-            header = "",
-            prefix = "",
-        },
-    }
-    require("lspconfig.ui.windows").default_options.border = "rounded"
-end)
+      },
+    },
+  },
+}
+
+lspconfig.ts_ls.setup {
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+  init_options = {
+    hostInfo = "neovim",
+  },
+  single_file_support = true,
+  settings = {
+    completions = {
+      completeFunctionCalls = true,
+    },
+  },
+}
+
+lspconfig.gleam.setup {}
+
+lspconfig.nil_ls.setup {}
+
+lspconfig.zls.setup {}
