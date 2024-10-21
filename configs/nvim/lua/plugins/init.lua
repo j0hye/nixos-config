@@ -57,7 +57,7 @@ local plugins = {
     end,
 
     config = function()
-      local mini_config = require "lua.plugins.mini_nvim"
+      local mini_config = require "plugins.mini_nvim"
       local mini_modules = {
         "icons",
         "comment",
@@ -168,7 +168,7 @@ local plugins = {
       require("mappings").lsp()
     end,
     config = function()
-      require "lua.plugins.lsp"
+      require "plugins.lsp"
     end,
   },
 
@@ -208,7 +208,7 @@ require("lazy").setup(plugins, {
     cache = {
       enabled = true,
     },
-    reset_packpath = true,
+    reset_packpath = false,
     rtp = {
       disabled_plugins = {
         "osc52",
