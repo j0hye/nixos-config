@@ -61,6 +61,8 @@ final: prev: {
         nvim
       ];
 
+        # mkdir -p ~/.config
+        # ln -sf ${../configs/nvim} ~/.config/nvim
       runScript = prev.writeShellScript "nvim-fhs.sh" ''
         exec ${nvim}/bin/nvim "$@"
       '';

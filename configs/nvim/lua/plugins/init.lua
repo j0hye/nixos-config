@@ -210,6 +210,7 @@ require("lazy").setup(plugins, {
     },
     reset_packpath = false,
     rtp = {
+      reset = false,
       disabled_plugins = {
         "osc52",
         "parser",
