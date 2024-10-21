@@ -13,7 +13,7 @@ M.blink = {
     show = "<C-space>",
     hide = "<C-e>",
     accept = "<C-y>",
-    select_and_accept = "",
+    select_and_accept = {},
     select_prev = "<C-p>",
     select_next = "<C-n>",
 
