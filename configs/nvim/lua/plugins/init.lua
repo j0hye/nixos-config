@@ -109,7 +109,7 @@ local plugins = {
   --- Completion menu stuffs
   {
     "saghen/blink.cmp",
-    name = "blink",
+    name = "blink.cmp",
     event = { "LspAttach", "InsertCharPre" },
     version = "v0.*",
     opts = require("plugins.cmp").blink
