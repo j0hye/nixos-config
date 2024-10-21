@@ -4,15 +4,15 @@ final: prev: {
       config = let
         extraPackages = with prev; [
           lua5_1
-          luautf8 # nvim-spider dep
+          luarocks
           clang
           fd
           ripgrep
           # pkg-config
           # cargo
           # luarocks
-          # lua-language-server
-          # stylua
+          lua-language-server
+          stylua
           # nil
           # nixd
           # alejandra
@@ -28,7 +28,9 @@ final: prev: {
 
           extraLuaPackages = p:
             with p; [
+              pathlib-nvim
               # magick
+              luautf8 # nvim-spider dep
             ];
 
           inherit extraPackages;

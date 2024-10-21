@@ -1,9 +1,3 @@
--- ┏┓     ┓┏•
--- ┃┃┓┏┏┏┓┃┃┓┏┳┓
--- ┣┛┗┻┛┛┗┗┛┗┛┗┗
--- Neo(vim) the less is more
---               @pwnwriter/pwnvim
-
 vim.loader.enable()
 
 require("opts").initial()
