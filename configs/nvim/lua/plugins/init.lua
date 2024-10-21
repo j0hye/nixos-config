@@ -95,7 +95,7 @@ local plugins = {
     },
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "lua", "vimdoc", "rust", "go", "astro", "json", "toml", "markdown" },
+        ensure_installed = { "nix", "lua", "vimdoc", "rust", "go", "astro", "json", "toml", "markdown" },
         highlight = {
           enable = true,
           use_languagetree = true,
@@ -109,41 +109,19 @@ local plugins = {
   --- Completion menu stuffs
   {
     "saghen/blink.cmp",
+    name = "blink",
     event = { "LspAttach", "InsertCharPre" },
     version = "v0.*",
-    opts = {
-      highlight = {
-        use_nvim_cmp_as_default = true,
-      },
-      nerd_font_variant = "normal",
-      accept = { auto_brackets = { enabled = true } },
-
-      -- trigger = { signature_help = { enabled = true } },
-
-      keymap = {
-        show = "<C-space>",
-        hide = { "<C-e>" },
-        accept = "<C-y",
-        select_prev = { "<Up>", "<C-p>" },
-        select_next = { "<Down>", "<C-n>" },
-
-        show_documentation = {},
-        hide_documentation = {},
-        scroll_documentation_up = "<C-b>",
-        scroll_documentation_down = "<C-f>",
-      },
-
-      windows = {
-        autocomplete = {
-          border = "single",
-        },
-        documentation = {
-          border = "single",
-        },
-      },
-    },
+    opts = require("plugins.cmp").blink
   },
-
+  {
+    "abecodes/tabout.nvim",
+    name = "tabout",
+    event = "InsertCharPre",
+    opt = true,
+    priority = 1000,
+    opts = require("plugins.cmp").tabout
+  },
   {
     "Bekaboo/dropbar.nvim",
     name = "dropbar",
@@ -170,14 +148,6 @@ local plugins = {
     config = function()
       require "plugins.lsp"
     end,
-  },
-
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    ft = "markdown",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
   },
 
   {
@@ -231,8 +201,7 @@ require("lazy").setup(plugins, {
     },
   },
   ui = {
-    border = "solid",
+    border = "single",
     title = "lazy.nvim",
-    size = { width = 0.9, height = 0.9 },
   },
 })

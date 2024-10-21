@@ -12,10 +12,6 @@ local M = {}
 M.map = map
 
 M.general = function()
-  map("i", "<C-h>", "<Left>")
-  map("i", "<C-j>", "<Down>")
-  map("i", "<C-k>", "<Up>")
-  map("i", "<C-l>", "<Right>")
   map("i", "jj", "<esc>")
   map("n", "<C-c>", "<cmd>noh<CR>")
   map("n", "<C-h>", "<C-w>h")

@@ -122,15 +122,17 @@ local starter = require "mini.starter"
 M.starter = {
   evaluate_single = false,
   header = table.concat({
-    " 𝙔𝘼𝙔!ーーーーー",
-    " ☆  *    .      ☆",
-    "     . ∧＿∧    ∩    * ☆",
-    "*  ☆ ( ・∀・)/ .",
-    "  .  ⊂         ノ* ☆",
-    "  ☆ * (つ ノ  .☆",
-    "       (ノ",
+    " __________",
+    "< Neovim!!!>",
+    " ----------",
+    "       \\    ^__^",
+    "         \\  (oo)\\_______",
+    "            (__)\\       )\\/\\",
+    "                ||----w |",
+    "                ||     ||",
   }, "\n"),
-  footer = os.date(),
+  footer = os.date() .. "\n\n" .. "NVIM: " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch,
+
   items = {
     {
       name = "Bookmarked files 󰃀",

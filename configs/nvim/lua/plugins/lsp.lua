@@ -20,8 +20,6 @@ capabilities.textDocument.completion.completionItem = {
 
 local lspconfig = require "lspconfig"
 
-lspconfig.rust_analyzer.setup {}
-
 lspconfig.lua_ls.setup {
   filetypes = { "lua" },
   settings = {
@@ -48,8 +46,6 @@ lspconfig.lua_ls.setup {
 
 lspconfig.bashls.setup {}
 
-lspconfig.gopls.setup {}
-
 lspconfig.pylsp.setup {
   settings = {
     pylsp = {
@@ -75,8 +71,6 @@ lspconfig.ts_ls.setup {
     },
   },
 }
-
-lspconfig.gleam.setup {}
 
 lspconfig.nil_ls.setup {}
 
