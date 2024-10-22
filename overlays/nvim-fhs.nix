@@ -8,11 +8,13 @@ final: prev: {
           clang
           fd
           ripgrep
-          # pkg-config
-          # cargo
+          unzip
+          gnumake
+          pkg-config
+          cargo
           # luarocks
-          lua-language-server
-          stylua
+          # lua-language-server
+          # stylua
           # nil
           # nixd
           # alejandra
