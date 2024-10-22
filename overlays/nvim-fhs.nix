@@ -5,7 +5,8 @@ final: prev: {
         extraPackages = with prev; [
           lua5_1
           luarocks
-          clang
+          # clang
+          gcc
           fd
           ripgrep
           unzip

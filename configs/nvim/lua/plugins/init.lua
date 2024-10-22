@@ -1,39 +1,6 @@
 local conf_path = vim.fn.stdpath "config" --[[@as string]]
-
 local plugins = {
-  -- colorschemes
-  {
-    "catppuccin/nvim",
-    lazy = true,
-    priority = 1000,
-    name = "catppuccin",
-    init = function()
-      vim.cmd.colorscheme "catppuccin"
-    end,
-    opts = {
-      transparent_background = true,
-      compile_path = vim.fn.stdpath "cache" .. "/catppuccin",
-      compile = true,
-      flavour = "mocha",
-      integrations = {
-        cmp = true,
-        treesitter = true,
-        mason = true,
-        native_lsp = {
-          enabled = true,
-          inlay_hints = {
-            background = true,
-          },
-        },
-        mini = {
-          enabled = true,
-          indentscope_color = "lavender",
-        },
-      },
-
-    },
-  },
-  --- Mini stuffs
+  -- Mini plugins 
   {
     "echasnovski/mini.nvim",
     name = "mini",
@@ -84,6 +51,7 @@ local plugins = {
     end,
   },
 
+  -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     name = "treesitter",
@@ -106,69 +74,51 @@ local plugins = {
     end,
   },
 
-  --- Completion menu stuffs
+  -- Completion
   {
-    name = "autocmp",
-    dir = conf_path,
-    event = { "LspAttach", "InsertCharPre" },
+    "max397574/care.nvim",
+    name = "care",
     dependencies = {
-      "max397574/care.nvim",
-      {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        build = "make install_jsregexp",
-        keys = function()
-          return {}
-        end,
-      },
       {
         "abecodes/tabout.nvim",
+        dependencies = {
+          {
+            "L3MON4D3/LuaSnip",
+            version = "v2.*",
+            build = "make install_jsregexp",
+            config = function()
+              return {}
+            end,
+          },
+        },
         lazy = false,
         opt = true,
         priority = 1000,
         event = "InsertCharPre",
+        opts = {},
       },
+      "max397574/care-cmp",
     },
-    config = require("plugins.cmp").care()
-  },
-
-
-
-  -- {
-  --   "saghen/blink.cmp",
-  --   name = "blink.cmp",
-  --   event = { "LspAttach", "InsertCharPre" },
-  --   version = "v0.*",
-  --   opts = require("plugins.cmp").blink
-  -- },
-  -- {
-  --   "abecodes/tabout.nvim",
-  --   name = "tabout",
-  --   event = "InsertCharPre",
-  --   opt = true,
-  --   priority = 1000,
-  --   opts = require("plugins.cmp").tabout
-  -- },
-  {
-    "Bekaboo/dropbar.nvim",
-    name = "dropbar",
-    keys = {
-      require("mappings").map({ "n" }, "<leader>p", function()
-        require("dropbar.api").pick(vim.v.count ~= 0 and vim.v.count)
-      end, "Toggle dropbar menu"),
+    config = require("plugins.cmp").care(),
+    opts = {
+      ui = {
+        menu = {
+          border = "single",
+        },
+        docs_view = {
+          border = "single",
+        },
+      },
+      snippet_expansion = function(body)
+        require("luasnip").lsp_expand(body)
+      end,
     },
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require("dropbar").setup()
-    end,
   },
-
-  --- lsp stuffs
+  -- LSP and Mason setup
   {
     "neovim/nvim-lspconfig",
     name = "lspconfig",
     dependencies = {
-      { "j-hui/fidget.nvim",       opts = {} },
       { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -182,7 +132,7 @@ local plugins = {
           },
           integrations = {
             lspconfig = true,
-            cmp = false,
+            cmp = true,
           },
         },
       },
@@ -196,6 +146,7 @@ local plugins = {
     end,
   },
 
+  -- Options, mappings and autos
   {
     name = "options",
     event = "VeryLazy",
@@ -210,16 +161,21 @@ local plugins = {
 }
 
 require("lazy").setup(plugins, {
-  concurrency = 4,
-  defaults = {
-    lazy = true,
-  },
-  install = {
-    colorscheme = { "catppuccin" },
-  },
-  dev = {
-    path = vim.env.NVIM_DEV,
-  },
+  -- concurrency = 4,
+  -- pkg = {
+  --   sources = {
+  --     "lazy",
+  --   },
+  -- },
+  -- defaults = {
+  --   lazy = false,
+  -- },
+  -- install = {
+  --   colorscheme = { "catppuccin" },
+  -- },
+  -- dev = {
+  --   path = vim.env.NVIM_DEV,
+  -- },
   performance = {
     cache = {
       enabled = true,

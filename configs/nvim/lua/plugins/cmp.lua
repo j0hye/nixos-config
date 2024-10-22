@@ -1,5 +1,19 @@
 local M = {}
-
+  -- {
+  --   "saghen/blink.cmp",
+  --   name = "blink.cmp",
+  --   event = { "LspAttach", "InsertCharPre" },
+  --   version = "v0.*",
+  --   opts = require("plugins.cmp").blink
+  -- },
+  -- {
+  --   "abecodes/tabout.nvim",
+  --   name = "tabout",
+  --   event = "InsertCharPre",
+  --   opt = true,
+  --   priority = 1000,
+  --   opts = require("plugins.cmp").tabout
+  -- },
 M.blink = {
   highlight = {
     use_nvim_cmp_as_default = false,
@@ -36,79 +50,36 @@ M.blink = {
   },
 }
 
-M.tabout = {
-  tabkey = '<Tab>',
-  backwards_tabkey = '<S-Tab>',
-  act_as_tab = true,
-  act_as_shift_tab = false,
-  default_tab = '<C-t>',
-  default_shift_tab = '<C-d>',
-  enable_backwards = true,
-  completion = false,
-  tabouts = {
-    { open = "'", close = "'" },
-    { open = '"', close = '"' },
-    { open = '`', close = '`' },
-    { open = '(', close = ')' },
-    { open = '[', close = ']' },
-    { open = '{', close = '}' },
-    { open = '<', close = '>' }
-  },
-  ignore_beginning = true,
-  exclude = {}
-}
-
 function M.care()
-  require("care").setup({
-    ui = {
-      menu = {
-        border = "single",
-      },
-      docs_view = {
-        border = "single",
-      },
-    },
-    snippet_expansion = function(body)
-      require("luasnip").lsp_expand(body)
-    end,
-
-  })
-
-  local ls = require("luasnip")
-
-  vim.keymap.set({ "i", "s" }, "<C-l>", function() ls.jump(1) end, { silent = true })
-  vim.keymap.set({ "i", "s" }, "<C-h>", function() ls.jump(-1) end, { silent = true })
-
-  vim.keymap.set({ "i", "s" }, "<C-ö>", function()
-    if ls.choice_active() then
-      ls.change_choice(1)
-    end
-  end, { silent = true })
-
-  vim.keymap.set("i", "<C-space>", function()
-    require("care").api.complete()
-  end)
-
   vim.keymap.set("i", "<C-y>", "<Plug>(CareConfirm)")
   vim.keymap.set("i", "<C-e>", "<Plug>(CareClose)")
   vim.keymap.set("i", "<C-n>", "<Plug>(CareSelectNext)")
   vim.keymap.set("i", "<C-p>", "<Plug>(CareSelectPrev)")
 
-  vim.keymap.set("i", "<c-f>", function()
+  vim.keymap.set("i", "<C-f>", function()
     if require("care").api.doc_is_open() then
       require("care").api.scroll_docs(4)
     else
-      vim.api.nvim_feedkeys(vim.keycode("<c-f>"), "n", false)
+      vim.api.nvim_feedkeys(vim.keycode("<C-f>"), "n", false)
     end
   end)
 
-  vim.keymap.set("i", "<c-d>", function()
+  vim.keymap.set("i", "<C-b>", function()
     if require("care").api.doc_is_open() then
       require("care").api.scroll_docs(-4)
     else
-      vim.api.nvim_feedkeys(vim.keycode("<c-f>"), "n", false)
+      vim.api.nvim_feedkeys(vim.keycode("<C-b>"), "n", false)
     end
   end)
+
+  vim.keymap.set({ "i", "s" }, "<C-l>", function() require("luasnip").jump(1) end, { silent = true })
+  vim.keymap.set({ "i", "s" }, "<C-h>", function() require("luasnip").jump(-1) end, { silent = true })
+
+  vim.keymap.set({ "i", "s" }, "<C-ö>", function()
+    if require("luasnip").choice_active() then
+      require("luasnip").change_choice(1)
+    end
+  end, { silent = true })
 end
 
 return M
