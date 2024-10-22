@@ -42,14 +42,14 @@ M.pick = {
 
 M.move = {
   mappings = {
-    left = "<S-h>",
-    right = "<S-l>",
-    down = "<S-j>",
-    up = "<S-k>",
-    line_left = "<S-h>",
-    line_right = "<S-l>",
-    line_down = "<S-j>",
-    line_up = "<S-k>",
+    left = "<A-h>",
+    right = "<A-l>",
+    down = "<A-j>",
+    up = "<A-k>",
+    line_left = "<A-h>",
+    line_right = "<A-l>",
+    line_down = "<A-j>",
+    line_up = "<A-k>",
   },
 }
 

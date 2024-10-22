@@ -140,7 +140,22 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     name = "lspconfig",
-    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+    dependencies =  {
+      { "j-hui/fidget.nvim", opts = {} },
+      { "williamboman/mason.nvim", config = true },
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        dependencies = { "Bilal2453/luvit-meta", lazy = true },
+        opts = {
+          library = {
+            { path = "luvit-meta/library", words = { "vim%.uv" } },
+          },
+        },
+      },
+    },
     event = { "BufReadPost", "BufNewFile" },
     keys = function ()
       require("mappings").lsp()
