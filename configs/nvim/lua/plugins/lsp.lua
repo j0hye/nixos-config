@@ -13,10 +13,7 @@ local servers = {
         },
         diagnostics = {
           globals = { "vim" },
-        },
-        format = {
-          defaultConfig = {
-          },
+          disable = { "missing-fields" },
         },
         hint = {
           enable = true,
@@ -53,81 +50,3 @@ require('mason-lspconfig').setup {
     end,
   },
 }
-
-
---
--- capabilities.textDocument.completion.completionItem = {
---   documentationFormat = { "markdown", "plaintext" },
---   snippetSupport = true,
---   preselectSupport = true,
---   insertReplaceSupport = true,
---   labelDetailsSupport = true,
---   deprecatedSupport = true,
---   commitCharactersSupport = true,
---   tagSupport = { valueSet = { 1 } },
---   resolveSupport = {
---     properties = {
---       "documentation",
---       "detail",
---       "additionalTextEdits",
---     },
---   },
--- }
---
--- local lspconfig = require "lspconfig"
---
--- lspconfig.lua_ls.setup {
---   filetypes = { "lua" },
---   settings = {
---     Lua = {
---       runtime = {
---         version = "LuaJIT",
---       },
---       completion = {
---         callSnippet = "Replace",
---       },
---       diagnostics = {
---         globals = { "vim" },
---       },
---       format = {
---         defaultConfig = {
---         },
---       },
---       hint = {
---         enable = true,
---       },
---     },
---   },
--- }
---
--- lspconfig.bashls.setup {}
---
--- lspconfig.pylsp.setup {
---   settings = {
---     pylsp = {
---       plugins = {
---         jedi_completion = {
---           include_params = true,
---         },
---       },
---     },
---   },
--- }
---
--- lspconfig.ts_ls.setup {
---   cmd = { "typescript-language-server", "--stdio" },
---   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
---   init_options = {
---     hostInfo = "neovim",
---   },
---   single_file_support = true,
---   settings = {
---     completions = {
---       completeFunctionCalls = true,
---     },
---   },
--- }
---
--- lspconfig.nil_ls.setup {}
---
--- lspconfig.zls.setup {}

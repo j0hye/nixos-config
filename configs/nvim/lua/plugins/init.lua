@@ -108,20 +108,47 @@ local plugins = {
 
   --- Completion menu stuffs
   {
-    "saghen/blink.cmp",
-    name = "blink.cmp",
+    name = "autocmp",
+    dir = conf_path,
     event = { "LspAttach", "InsertCharPre" },
-    version = "v0.*",
-    opts = require("plugins.cmp").blink
+    dependencies = {
+      "max397574/care.nvim",
+      {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
+        keys = function()
+          return {}
+        end,
+      },
+      {
+        "abecodes/tabout.nvim",
+        lazy = false,
+        opt = true,
+        priority = 1000,
+        event = "InsertCharPre",
+      },
+    },
+    config = require("plugins.cmp").care()
   },
-  {
-    "abecodes/tabout.nvim",
-    name = "tabout",
-    event = "InsertCharPre",
-    opt = true,
-    priority = 1000,
-    opts = require("plugins.cmp").tabout
-  },
+
+
+
+  -- {
+  --   "saghen/blink.cmp",
+  --   name = "blink.cmp",
+  --   event = { "LspAttach", "InsertCharPre" },
+  --   version = "v0.*",
+  --   opts = require("plugins.cmp").blink
+  -- },
+  -- {
+  --   "abecodes/tabout.nvim",
+  --   name = "tabout",
+  --   event = "InsertCharPre",
+  --   opt = true,
+  --   priority = 1000,
+  --   opts = require("plugins.cmp").tabout
+  -- },
   {
     "Bekaboo/dropbar.nvim",
     name = "dropbar",
@@ -140,8 +167,8 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     name = "lspconfig",
-    dependencies =  {
-      { "j-hui/fidget.nvim", opts = {} },
+    dependencies = {
+      { "j-hui/fidget.nvim",       opts = {} },
       { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -153,11 +180,15 @@ local plugins = {
           library = {
             { path = "luvit-meta/library", words = { "vim%.uv" } },
           },
+          integrations = {
+            lspconfig = true,
+            cmp = false,
+          },
         },
       },
     },
     event = { "BufReadPost", "BufNewFile" },
-    keys = function ()
+    keys = function()
       require("mappings").lsp()
     end,
     config = function()
