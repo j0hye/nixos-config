@@ -5,7 +5,6 @@ final: prev: {
         extraPackages = with prev; [
           lua5_1
           luarocks
-          # clang
           gcc
           fd
           ripgrep
@@ -13,14 +12,6 @@ final: prev: {
           gnumake
           pkg-config
           cargo
-          # luarocks
-          # lua-language-server
-          # stylua
-          # nil
-          # nixd
-          # alejandra
-          # statix
-          # manix
         ];
       in
         prev.neovimUtils.makeNeovimConfig
@@ -32,15 +23,14 @@ final: prev: {
           extraLuaPackages = p:
             with p; [
               pathlib-nvim
-              # magick
               luautf8 # nvim-spider dep
             ];
 
           inherit extraPackages;
 
-          plugins = with prev.vimPlugins; [
-            # nvim-treesitter.withAllGrammars
-          ];
+          # plugins = with prev.vimPlugins; [
+          #   nvim-treesitter.withAllGrammars
+          # ];
 
           customRC = ''
             set runtimepath^=${../configs/nvim/.}

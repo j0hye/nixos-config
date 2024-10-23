@@ -12,7 +12,7 @@ local plugins = {
   { -- Mini plugins
     "echasnovski/mini.nvim",
     event = "VimEnter",
-    config = function ()
+    config = function()
       mini_setup()
       require("mappings").mini()
     end
@@ -23,13 +23,13 @@ local plugins = {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
-        ensure_installed = { "nix", "lua", "vimdoc", "json", "toml", "markdown" },
-        highlight = {
-          enable = true,
-          use_languagetree = true,
-        },
-        indent = { enable = true },
+      ensure_installed = { "nix", "lua", "vimdoc", "json", "toml", "markdown" },
+      highlight = {
+        enable = true,
+        use_languagetree = true,
       },
+      indent = { enable = true },
+    },
   },
   { -- Completion
     "max397574/care.nvim",
@@ -37,21 +37,12 @@ local plugins = {
     dependencies = {
       "max397574/care-cmp",
       {
-        "abecodes/tabout.nvim",
-        dependencies = {
-          {
-            "L3MON4D3/LuaSnip",
-            version = "v2.*",
-            build = "make install_jsregexp",
-            config = function()
-              return {}
-            end,
-          },
-        },
-        opt = true,
-        priority = 1000,
-        event = "InsertCharPre",
-        opts = {},
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
+        config = function()
+          return {}
+        end,
       },
     },
     config = require("plugins.cmp").care(),
@@ -68,6 +59,11 @@ local plugins = {
         require("luasnip").lsp_expand(body)
       end,
     },
+  },
+  {
+    "abecodes/tabout.nvim",
+    event = "InsertCharPre",
+    opts = {},
   },
   { -- LSP and Mason setup
     "neovim/nvim-lspconfig",
