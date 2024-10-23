@@ -3,55 +3,22 @@ local conf_path = vim.fn.stdpath "config" --[[@as string]]
 local function mini_setup()
   local mini = require("plugins.mini")
   for _, module in ipairs(mini.modules) do
-    require("mini." .. module).setup(mini[module])
+    require("mini." .. module).setup(mini[module] or {})
+    require("mini.icons").mock_nvim_web_devicons()
   end
 end
 
 local plugins = {
-  {
+  { -- Mini plugins
     "echasnovski/mini.nvim",
-    -- event = "VimEnter",
+    event = "VimEnter",
     config = function ()
       mini_setup()
+      require("mappings").mini()
     end
   },
-
-
-  -- Mini plugins 
-  -- {
-  --   "echasnovski/mini.nvim",
-  --   name = "mini",
-  --   version = false,
-  --   keys = function()
-  --     require("mappings").mini()
-  --   end,
-  --   init = function()
-  --     package.preload["nvim-web-devicons"] = function()
-  --       package.loaded["nvim-web-devicons"] = {}
-  --       require("mini.icons").mock_nvim_web_devicons()
-  --       return package.loaded["nvim-web-devicons"]
-  --     end
-  --   end,
-  --   -- event = function()
-  --   --   if vim.fn.argc() == 0 then
-  --   --     return "VimEnter"
-  --   --   else
-  --   --     return { "InsertEnter", "LspAttach" }
-  --   --   end
-  --   -- end,
-  --
-  --   config = function()
-  --     local mini_config = require "plugins.mini_nvim"
-  --     for _, module in ipairs(mini_modules) do
-  --       require("mini." .. module).setup(mini_config[module])
-  --     end
-  --   end,
-  -- },
-
-  -- Treesitter
-  {
+  { -- Treesitter
     "nvim-treesitter/nvim-treesitter",
-    name = "treesitter",
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     event = {
@@ -67,11 +34,8 @@ local plugins = {
         indent = { enable = true },
       },
   },
-
-  -- Completion
-  {
+  { -- Completion
     "max397574/care.nvim",
-    name = "care",
     dependencies = {
       {
         "abecodes/tabout.nvim",
@@ -108,10 +72,8 @@ local plugins = {
       end,
     },
   },
-  -- LSP and Mason setup
-  {
+  { -- LSP and Mason setup
     "neovim/nvim-lspconfig",
-    name = "lspconfig",
     dependencies = {
       { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
@@ -139,10 +101,8 @@ local plugins = {
       require "plugins.lsp"
     end,
   },
-
-  -- Options, mappings and autos
-  {
-    name = "options",
+  { -- Options, mappings and autos
+    name = "Options",
     event = "VeryLazy",
     dir = conf_path,
     config = function()
@@ -155,14 +115,14 @@ local plugins = {
 }
 
 require("lazy").setup(plugins, {
-  -- concurrency = 4,
+  concurrency = 4,
   -- pkg = {
   --   sources = {
   --     "lazy",
   --   },
   -- },
   -- defaults = {
-  --   lazy = false,
+  --   lazy = true,
   -- },
   -- install = {
   --   colorscheme = { "catppuccin" },
@@ -181,7 +141,7 @@ require("lazy").setup(plugins, {
         "osc52",
         "parser",
         "gzip",
-        -- "netrwPlugin",
+        "netrwPlugin",
         "health",
         "man",
         "matchit",
