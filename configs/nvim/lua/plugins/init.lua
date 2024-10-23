@@ -1,55 +1,52 @@
 local conf_path = vim.fn.stdpath "config" --[[@as string]]
+
+local function mini_setup()
+  local mini = require("plugins.mini")
+  for _, module in ipairs(mini.modules) do
+    require("mini." .. module).setup(mini[module])
+  end
+end
+
 local plugins = {
-  -- Mini plugins 
   {
     "echasnovski/mini.nvim",
-    name = "mini",
-    version = false,
-    keys = function()
-      require("mappings").mini()
-    end,
-    init = function()
-      package.preload["nvim-web-devicons"] = function()
-        package.loaded["nvim-web-devicons"] = {}
-        require("mini.icons").mock_nvim_web_devicons()
-        return package.loaded["nvim-web-devicons"]
-      end
-    end,
-    event = function()
-      if vim.fn.argc() == 0 then
-        return "VimEnter"
-      else
-        return { "InsertEnter", "LspAttach" }
-      end
-    end,
-
-    config = function()
-      local mini_config = require "plugins.mini_nvim"
-      local mini_modules = {
-        "icons",
-        "comment",
-        "starter",
-        "pairs",
-        "ai",
-        "surround",
-        "files",
-        "hipatterns",
-        "bufremove",
-        "pick",
-        "move",
-        "indentscope",
-        "extra",
-        "visits",
-        "clue",
-        "notify",
-        "git",
-        "diff",
-      }
-      for _, module in ipairs(mini_modules) do
-        require("mini." .. module).setup(mini_config[module])
-      end
-    end,
+    -- event = "VimEnter",
+    config = function ()
+      mini_setup()
+    end
   },
+
+
+  -- Mini plugins 
+  -- {
+  --   "echasnovski/mini.nvim",
+  --   name = "mini",
+  --   version = false,
+  --   keys = function()
+  --     require("mappings").mini()
+  --   end,
+  --   init = function()
+  --     package.preload["nvim-web-devicons"] = function()
+  --       package.loaded["nvim-web-devicons"] = {}
+  --       require("mini.icons").mock_nvim_web_devicons()
+  --       return package.loaded["nvim-web-devicons"]
+  --     end
+  --   end,
+  --   -- event = function()
+  --   --   if vim.fn.argc() == 0 then
+  --   --     return "VimEnter"
+  --   --   else
+  --   --     return { "InsertEnter", "LspAttach" }
+  --   --   end
+  --   -- end,
+  --
+  --   config = function()
+  --     local mini_config = require "plugins.mini_nvim"
+  --     for _, module in ipairs(mini_modules) do
+  --       require("mini." .. module).setup(mini_config[module])
+  --     end
+  --   end,
+  -- },
 
   -- Treesitter
   {
@@ -61,17 +58,14 @@ local plugins = {
       "BufReadPost",
       "BufNewFile",
     },
-    config = function()
-      require("nvim-treesitter.configs").setup {
+    opts = {
         ensure_installed = { "nix", "lua", "vimdoc", "rust", "go", "astro", "json", "toml", "markdown" },
         highlight = {
           enable = true,
           use_languagetree = true,
         },
-
         indent = { enable = true },
-      }
-    end,
+      },
   },
 
   -- Completion
@@ -187,7 +181,7 @@ require("lazy").setup(plugins, {
         "osc52",
         "parser",
         "gzip",
-        "netrwPlugin",
+        -- "netrwPlugin",
         "health",
         "man",
         "matchit",

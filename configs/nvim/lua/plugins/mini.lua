@@ -1,5 +1,26 @@
 local M = {}
 
+M.modules = {
+  "icons",
+  "comment",
+  "starter",
+  "pairs",
+  "ai",
+  "surround",
+  "files",
+  "hipatterns",
+  "bufremove",
+  "pick",
+  "move",
+  "indentscope",
+  "extra",
+  "visits",
+  "clue",
+  "notify",
+  "git",
+  "diff",
+}
+
 M.pairs = {
   mappings = {
     ["<"] = { action = "closeopen", pair = "<>", neigh_pattern = "[^\\].", register = { cr = false } },
@@ -131,7 +152,8 @@ M.starter = {
     "                ||----w |",
     "                ||     ||",
   }, "\n"),
-  footer = os.date() .. "\n\n" .. "NVIM: " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch,
+  footer = os.date() ..
+  "\n\n" .. "NVIM: " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch,
 
   items = {
     {
