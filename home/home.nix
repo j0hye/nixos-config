@@ -11,12 +11,9 @@
   home.packages = [
     pkgs.xclip
     pkgs.nvim-fhs
+    pkgs.nixd
+    pkgs.alejandra
   ];
-
-  # programs.neovim = {
-  #   enable = true;
-  #   package = pkgs.neovim;
-  # };
   
   # Default editor
   home.sessionVariables = {

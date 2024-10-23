@@ -1,6 +1,5 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local servers = {
-  nil_ls = {},
   lua_ls = {
     filetypes = { "lua" },
     settings = {
@@ -50,3 +49,27 @@ require('mason-lspconfig').setup {
     end,
   },
 }
+
+-- LSPs not in Mason
+require("lspconfig").nixd.setup({
+  cmd = { "nixd" },
+  settings = {
+    nixd = {
+      nixpkgs = {
+        -- expr = "import <nixpkgs> { }",
+        expr = { "import (builtins.getFlake \"/home/johye/nixos\").inputs.nixpkgs { }"},
+      },
+      formatting = {
+        command = { "alejandra" },
+      },
+      options = {
+        nixos = {
+          expr = "import (builtins.getFlake \"/home/johye/nixos\").nixosConfigurations.wsl.options",
+        },
+        -- home_manager = {
+        --   expr = "import (builtins.getFlake \"/home/johye/nixos\").homeConfigurations.johye.options",
+        -- },
+      },
+    },
+  },
+})
