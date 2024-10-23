@@ -21,12 +21,9 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
-    event = {
-      "BufReadPost",
-      "BufNewFile",
-    },
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
-        ensure_installed = { "nix", "lua", "vimdoc", "rust", "go", "astro", "json", "toml", "markdown" },
+        ensure_installed = { "nix", "lua", "vimdoc", "json", "toml", "markdown" },
         highlight = {
           enable = true,
           use_languagetree = true,
@@ -36,7 +33,9 @@ local plugins = {
   },
   { -- Completion
     "max397574/care.nvim",
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
+      "max397574/care-cmp",
       {
         "abecodes/tabout.nvim",
         dependencies = {
@@ -49,13 +48,11 @@ local plugins = {
             end,
           },
         },
-        lazy = false,
         opt = true,
         priority = 1000,
         event = "InsertCharPre",
         opts = {},
       },
-      "max397574/care-cmp",
     },
     config = require("plugins.cmp").care(),
     opts = {
@@ -115,20 +112,12 @@ local plugins = {
 }
 
 require("lazy").setup(plugins, {
-  concurrency = 4,
-  -- pkg = {
-  --   sources = {
-  --     "lazy",
-  --   },
-  -- },
-  -- defaults = {
-  --   lazy = true,
-  -- },
+  concurrency = vim.uv.available_parallelism() * 2,
+  defaults = {
+    lazy = true,
+  },
   -- install = {
   --   colorscheme = { "catppuccin" },
-  -- },
-  -- dev = {
-  --   path = vim.env.NVIM_DEV,
   -- },
   performance = {
     cache = {
