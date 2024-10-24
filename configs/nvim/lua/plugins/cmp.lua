@@ -50,36 +50,5 @@ M.blink = {
   },
 }
 
-function M.care()
-  vim.keymap.set("i", "<C-y>", "<Plug>(CareConfirm)")
-  vim.keymap.set("i", "<C-e>", "<Plug>(CareClose)")
-  vim.keymap.set("i", "<C-n>", "<Plug>(CareSelectNext)")
-  vim.keymap.set("i", "<C-p>", "<Plug>(CareSelectPrev)")
-
-  vim.keymap.set("i", "<C-f>", function()
-    if require("care").api.doc_is_open() then
-      require("care").api.scroll_docs(4)
-    else
-      vim.api.nvim_feedkeys(vim.keycode("<C-f>"), "n", false)
-    end
-  end)
-
-  vim.keymap.set("i", "<C-b>", function()
-    if require("care").api.doc_is_open() then
-      require("care").api.scroll_docs(-4)
-    else
-      vim.api.nvim_feedkeys(vim.keycode("<C-b>"), "n", false)
-    end
-  end)
-
-  vim.keymap.set({ "i", "s" }, "<C-l>", function() require("luasnip").jump(1) end, { silent = true })
-  vim.keymap.set({ "i", "s" }, "<C-h>", function() require("luasnip").jump(-1) end, { silent = true })
-
-  vim.keymap.set({ "i", "s" }, "<C-ö>", function()
-    if require("luasnip").choice_active() then
-      require("luasnip").change_choice(1)
-    end
-  end, { silent = true })
-end
 
 return M

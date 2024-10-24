@@ -11,7 +11,7 @@ local M = {}
 -- Expose the map function
 M.map = map
 
-M.general = function()
+function M.general()
   map("i", "jj", "<esc>")
   map("n", "<C-c>", "<cmd>noh<CR>")
   map("n", "<C-h>", "<C-w>h")
@@ -33,7 +33,7 @@ M.general = function()
   map("v", "?/", 'y:/ <C-R>"<cr>"') -- Search across the buffer
 end
 
-M.mini = function()
+function M.mini()
   local minipick = require "mini.pick"
   local miniextra = require "mini.extra"
   local minivisits = require "mini.visits"
@@ -94,7 +94,7 @@ M.mini = function()
   end, "Diagnostic in picker")
 end
 
-M.misc = function()
+function M.misc()
   map("n", "<leader>n", function()
     modules.toggle_numbering()
   end, "Toggle line numbering")
@@ -104,7 +104,7 @@ M.misc = function()
   end, "Toggle flow")
 end
 
-M.lsp = function()
+function M.lsp()
   -- map the following keys on lsp attach only
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -147,6 +147,32 @@ M.lsp = function()
       map({ "i", "x" }, "<c-space>", vim.lsp.buf.signature_help, "Lsp signature help")
     end,
   })
+end
+
+function M.care()
+  vim.keymap.set("i", "<C-y>", "<Plug>(CareConfirm)")
+  vim.keymap.set("i", "<C-e>", "<Plug>(CareClose)")
+  vim.keymap.set("i", "<C-n>", "<Plug>(CareSelectNext)")
+  vim.keymap.set("i", "<C-p>", "<Plug>(CareSelectPrev)")
+
+  vim.keymap.set("i", "<C-f>", function()
+    if require("care").api.doc_is_open() then
+      require("care").api.scroll_docs(4)
+    else
+      vim.api.nvim_feedkeys(vim.keycode("<C-f>"), "n", false)
+    end
+  end)
+
+  vim.keymap.set("i", "<C-b>", function()
+    if require("care").api.doc_is_open() then
+      require("care").api.scroll_docs(-4)
+    else
+      vim.api.nvim_feedkeys(vim.keycode("<C-b>"), "n", false)
+    end
+  end)
+
+  vim.keymap.set({ "i", "s" }, "<C-l>", function() require("luasnip").jump(1) end, { silent = true })
+  vim.keymap.set({ "i", "s" }, "<C-h>", function() require("luasnip").jump(-1) end, { silent = true })
 end
 
 return M

@@ -19,8 +19,8 @@ local plugins = {
   },
   { -- Treesitter
     "nvim-treesitter/nvim-treesitter",
-    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
+    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       ensure_installed = { "nix", "lua", "vimdoc", "json", "toml", "markdown" },
@@ -33,7 +33,6 @@ local plugins = {
   },
   { -- Completion
     "max397574/care.nvim",
-    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "max397574/care-cmp",
       {
@@ -45,7 +44,8 @@ local plugins = {
         end,
       },
     },
-    config = require("plugins.cmp").care(),
+    event = { "BufReadPost", "BufNewFile" },
+    keys = require("mappings").care(),
     opts = {
       ui = {
         menu = {
@@ -87,12 +87,11 @@ local plugins = {
       },
     },
     event = { "BufReadPost", "BufNewFile" },
-    keys = function()
-      require("mappings").lsp()
-    end,
-    config = function()
-      require "plugins.lsp"
-    end,
+    keys = require("mappings").lsp(),
+    config = function ()
+      require("plugins.lsp").lspconfig()
+      require("plugins.lsp").not_in_mason()
+    end
   },
   { -- Options, mappings and autos
     name = "Options",
