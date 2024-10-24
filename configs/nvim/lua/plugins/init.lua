@@ -46,19 +46,7 @@ local plugins = {
         },
         event = { "BufReadPost", "BufNewFile" },
         keys = require("mappings").care(),
-        opts = {
-            ui = {
-                menu = {
-                    border = "single",
-                },
-                docs_view = {
-                    border = "single",
-                },
-            },
-            snippet_expansion = function(body)
-                require("luasnip").lsp_expand(body)
-            end,
-        },
+        opts = require("plugins.cmp").care,
     },
     {
         "abecodes/tabout.nvim",
