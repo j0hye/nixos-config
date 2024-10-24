@@ -9,6 +9,14 @@ local function mini_setup()
 end
 
 local plugins = {
+    { -- Colorscheme
+        "RRethy/base16-nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd "colorscheme base16-gruvbox-dark-medium"
+        end,
+    },
     { -- Mini plugins
         "echasnovski/mini.nvim",
         event = "VimEnter",
@@ -19,10 +27,14 @@ local plugins = {
     },
     { -- Treesitter
         "nvim-treesitter/nvim-treesitter",
+        version = false,
+        lazy = vim.fn.argc(-1) == 0,
+        main = "nvim-treesitter.configs",
         build = ":TSUpdate",
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         event = { "BufReadPost", "BufNewFile" },
         opts = {
+            auto_install = true,
             ensure_installed = { "nix", "lua", "vimdoc", "json", "toml", "markdown" },
             highlight = {
                 enable = true,
@@ -44,7 +56,7 @@ local plugins = {
                 end,
             },
         },
-        event = { "BufReadPost", "BufNewFile" },
+        event = { "BufReadPost", "BufNewFile", "InsertCharPre" },
         keys = require("mappings").care(),
         opts = require("plugins.cmp").care,
     },

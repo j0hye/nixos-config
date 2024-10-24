@@ -1,6 +1,9 @@
 final: prev: {
   nvim-fhs = let
     nvim = let
+      neovim-nightly-unwrapped = final.neovim.overrideAttrs {
+        treesitter-parsers = {};
+      };
       config = let
         extraPackages = with prev; [
           lua5_1
@@ -12,6 +15,7 @@ final: prev: {
           gnumake
           pkg-config
           cargo
+          wget
         ];
       in
         prev.neovimUtils.makeNeovimConfig
@@ -46,7 +50,7 @@ final: prev: {
           ];
         };
     in
-      prev.wrapNeovimUnstable final.neovim config;
+      prev.wrapNeovimUnstable neovim-nightly-unwrapped config;
   in
     prev.buildFHSEnv {
       name = "nvim";
@@ -54,8 +58,6 @@ final: prev: {
         nvim
       ];
 
-        # mkdir -p ~/.config
-        # ln -sf ${../configs/nvim} ~/.config/nvim
       runScript = prev.writeShellScript "nvim-fhs.sh" ''
         exec ${nvim}/bin/nvim "$@"
       '';

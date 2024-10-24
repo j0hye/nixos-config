@@ -20,6 +20,9 @@ function M.lspconfig()
             filetypes = { "lua" },
             settings = {
                 Lua = {
+                    workspace = {
+                        checkThirdParty = false,
+                    },
                     runtime = {
                         version = "LuaJIT",
                     },
@@ -31,6 +34,9 @@ function M.lspconfig()
                         disable = { "missing-fields" },
                     },
                     hint = {
+                        enable = true,
+                    },
+                    codeLens = {
                         enable = true,
                     },
                 },
